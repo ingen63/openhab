@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import org.openhab.binding.dmlsmeter.DmlsMeterBindingProvider;
-import org.openhab.core.library.types.DecimalType;
 import org.openmuc.j62056.DataSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,9 +18,9 @@ import org.slf4j.LoggerFactory;
  * @version 0.0.1
  * 
  */
-public class SimulateDmlsMeterBinding extends DmlsMeterBinding {
+public class SimulateDmlsMeterReader implements DmlsMeterReader {
 
-	private static final Logger logger = LoggerFactory.getLogger(SimulateDmlsMeterBinding.class);
+	private static final Logger logger = LoggerFactory.getLogger(SimulateDmlsMeterReader.class);
 
 	private static final String[] simulatedValues = { 
 		        "F.F;00000000;",
@@ -39,33 +37,17 @@ public class SimulateDmlsMeterBinding extends DmlsMeterBinding {
 
 	/**
 	 */
-	public SimulateDmlsMeterBinding() {
+	public SimulateDmlsMeterReader() {
 
 	}
 
-	@Override
-	protected void execute() {
-		
-		Map<String,DataSet> dataSets = read();
-		
-		for (DmlsMeterBindingProvider provider : providers) {
 
-			for (String itemName : provider.getItemNames()) {
-				String obis = provider.getObis(itemName);
-				if (obis != null && dataSets.containsKey(obis)) {
-					DataSet dataSet = dataSets.get(obis);
-					double value = Double.parseDouble(dataSet.getValue())+increment++;
-					eventPublisher.postUpdate(itemName, new DecimalType(value));
-				}
-			}
-		}
-	}
 
 	/**
 	 * simulates the reading of the meter. 
 	 * @return a map of DataSet objects with the obis as key.
 	 */
-	private Map<String,DataSet> read() {
+	public Map<String,DataSet> read() {
 		Map<String,DataSet> dataSets = new HashMap<String, DataSet>();
 
 		for (String row : simulatedValues) {
@@ -93,6 +75,9 @@ public class SimulateDmlsMeterBinding extends DmlsMeterBinding {
 			} else {
 				parsedRow[i] = "";
 			}
+		}
+		if(parsedRow[0].startsWith("1.8")) {
+		   parsedRow[1] = Double.toString(Double.parseDouble(parsedRow[1])+increment++);
 		}
 		return parsedRow;
 
