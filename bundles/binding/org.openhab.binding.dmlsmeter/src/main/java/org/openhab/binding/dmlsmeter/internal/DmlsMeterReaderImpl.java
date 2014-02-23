@@ -57,7 +57,7 @@ public class DmlsMeterReaderImpl implements DmlsMeterReader {
 		try {
 			connection.open();
 		} catch (IOException e) {
-			logger.error("Failed to open serial port " + serialPort + ": " + e.getMessage());
+			logger.error("Failed to open serial port {}: {}",serialPort, e.getMessage());
 			return dataSetMap;
 		}
 
@@ -69,7 +69,7 @@ public class DmlsMeterReaderImpl implements DmlsMeterReader {
 				dataSetMap.put(dataSet.getId(), dataSet);
 			}		
 		} catch (IOException e) {
-			logger.error("IOException while trying to read: " + e.getMessage());	
+			logger.error("IOException while trying to read: {}", e.getMessage());	
 		} catch (TimeoutException e) {
 			logger.error("Read attempt timed out");
 		} finally {
