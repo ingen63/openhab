@@ -11,45 +11,46 @@ package org.openhab.binding.dmlsmeter.internal;
 
  
 /**
- * Class defining the config parameter for metering device
+ * Class defining the config parameter for dmls metering device
  * 
  * @author Peter Kreutzer
  * @since 1.4.0
  */
-public class MeterDevice {
+public class DmlsMeterDeviceConfig {
 	
-	private String serialPort;
-	private int baudRateChangeDelay;
-	private boolean echoHandling;
+    // configuration defaults for optional properties
+	static final int DEFAULT_BAUD_RATE_CHANGE_DELAY = 0;
+	static final boolean DEFAULT_ECHO_HANDLING= true;
+	static final String DEFAULT_SERIAL_PORT = "COM1";
+
+	private final String serialPort;
+	private final int baudRateChangeDelay;
+	private final boolean echoHandling;
 	
-	public MeterDevice(String serialPort, int baudRateChangeDelay, boolean echoHandling) {
+	public DmlsMeterDeviceConfig(String serialPort, int baudRateChangeDelay, boolean echoHandling) {
 		this.serialPort = serialPort;
 		this.baudRateChangeDelay = baudRateChangeDelay;
 		this.echoHandling = echoHandling;
-	}
-	
-	public void setSerialPort(String serialPort) {
-		this.serialPort = serialPort;
 	}
 	
 	public String getSerialPort() {
 		return this.serialPort;
 	}
 	
-	public void setBaudRateChangeDelay(int baudRateChangeDelay) {
-		this.baudRateChangeDelay = baudRateChangeDelay;
-	}
-	
 	public int getBaudRateChangeDelay() {
 		return this.baudRateChangeDelay;
 	}
 	
-	public void setEchoHandling(boolean echoHandling) {
-		this.echoHandling = echoHandling;
-	}
-	
 	public boolean getEchoHandling() {
 		return this.echoHandling;
+	}
+
+
+	@Override
+	public String toString() {
+		return "DmlsMeterDeviceConfig [serialPort=" + serialPort
+				+ ", baudRateChangeDelay=" + baudRateChangeDelay
+				+ ", echoHandling=" + echoHandling + "]";
 	}
 
 

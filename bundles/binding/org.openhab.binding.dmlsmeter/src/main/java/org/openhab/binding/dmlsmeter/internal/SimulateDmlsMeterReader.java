@@ -34,11 +34,33 @@ public class SimulateDmlsMeterReader implements DmlsMeterReader {
 			    "C.2.1;07-06-30 02:01;" };
 	
 	private static int increment = 0;
+	
+	private final String name;
+	
+	private final DmlsMeterDeviceConfig config;
 
 	/**
 	 */
-	public SimulateDmlsMeterReader() {
+	public SimulateDmlsMeterReader(String name, DmlsMeterDeviceConfig config) {
+          this.name = name;
+          this.config = config;
+	}
 
+	/* (non-Javadoc)
+	 * @see org.openhab.binding.dmlsmeter.internal.DmlsMeterReader#getName()
+	 */
+	@Override
+	public String getName() {
+		return name;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see org.openhab.binding.dmlsmeter.internal.DmlsMeterReader#getConfig()
+	 */
+	@Override
+	public DmlsMeterDeviceConfig getConfig() {
+		return config;
 	}
 
 

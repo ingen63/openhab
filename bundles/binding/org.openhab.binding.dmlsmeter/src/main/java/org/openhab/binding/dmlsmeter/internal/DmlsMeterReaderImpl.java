@@ -13,7 +13,6 @@ import org.openmuc.j62056.Connection;
 import org.openmuc.j62056.DataSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import gnu.io.*; 
 
 /**
  * @author Günter Speckhofer
@@ -23,21 +22,33 @@ public class DmlsMeterReaderImpl implements DmlsMeterReader {
 	
 	private static final Logger logger = LoggerFactory.getLogger(DmlsMeterReaderImpl.class);
 		
-	/** the serial port to use for connecting to the metering device */
-    private final String serialPort;
-   
-	/**  Delay of baud rate change in ms. Default is 0. USB to serial converters often require a delay of up to 250ms */
-    private final int baudRateChangeDelay;
+    private final DmlsMeterDeviceConfig config;
 
-	/**  Enable handling of echos caused by some optical tranceivers */
-    private final boolean echoHandling;
+	private final String name;
 
-	public DmlsMeterReaderImpl(String serialPort, int baudRateChangeDelay,boolean echoHandling) {
-		super();
-		this.serialPort = serialPort;
-		this.baudRateChangeDelay = baudRateChangeDelay;
-		this.echoHandling = echoHandling;
+	public DmlsMeterReaderImpl(String name, DmlsMeterDeviceConfig config) {
+		this.name = name;
+		this.config = config;
 	}
+
+	
+	/* (non-Javadoc)
+	 * @see org.openhab.binding.dmlsmeter.internal.DmlsMeterReader#getName()
+	 */
+	@Override
+	public String getName() {
+		return name;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see org.openhab.binding.dmlsmeter.internal.DmlsMeterReader#getConfig()
+	 */
+	@Override
+	public DmlsMeterDeviceConfig getConfig() {
+		return config;
+	}
+
 
 	/* (non-Javadoc)
 	 * @see org.openhab.binding.dmlsmeter.internal.DmlsMeterReader#read()
@@ -47,12 +58,12 @@ public class DmlsMeterReaderImpl implements DmlsMeterReader {
 		// the frequently executed code (polling) goes here ...
 		Map<String,DataSet> dataSetMap = new HashMap<String, DataSet>();
 		
-		Connection connection = new Connection(serialPort, echoHandling, baudRateChangeDelay);
+		Connection connection = new Connection(config.getSerialPort(), config.getEchoHandling(), config.getBaudRateChangeDelay());
 
 		try {
 			connection.open();
 		} catch (IOException e) {
-			logger.error("Failed to open serial port {}: {}",serialPort, e.getMessage());
+			logger.error("Failed to open serial port {}: {}",config.getSerialPort(), e.getMessage());
 			return dataSetMap;
 		}
 
