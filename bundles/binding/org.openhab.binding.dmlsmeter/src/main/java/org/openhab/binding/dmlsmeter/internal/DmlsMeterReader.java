@@ -4,11 +4,9 @@ import java.util.Map;
 
 import org.openmuc.j62056.DataSet;
 /**
- * Interface for the low level reader.
  * 
- * @author Peter Kreutzer
  * @author Günter Speckhofer
- * @since 1.4.0
+ *
  */
 public interface DmlsMeterReader {
 

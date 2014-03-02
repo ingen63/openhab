@@ -62,8 +62,7 @@ public class DmlsMeterGenericBindingProvider extends AbstractGenericBindingProvi
 		//TODO add own config parser class 
 		StringTokenizer tokenizer = new StringTokenizer(bindingConfig.trim(), ";");
 		String[] tokens = new String[tokenizer.countTokens()];  
-		for( int i = 0; i < tokens.length; i++ )  
-		{  
+		for( int i = 0; i < tokens.length; i++ ) {  
 			tokens[i] = tokenizer.nextToken();  
 		}  
 		config.meterName=tokens[0].trim();	
