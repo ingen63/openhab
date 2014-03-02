@@ -9,7 +9,6 @@ package org.openhab.binding.dmlsmeter.internal;
  * http://www.eclipse.org/legal/epl-v10.html
  */
 
- 
 /**
  * Class defining the config parameter for dmls metering device
  * 
@@ -17,42 +16,37 @@ package org.openhab.binding.dmlsmeter.internal;
  * @since 1.4.0
  */
 public class DmlsMeterDeviceConfig {
-	
-    // configuration defaults for optional properties
+
+	// configuration defaults for optional properties
 	static final int DEFAULT_BAUD_RATE_CHANGE_DELAY = 0;
-	static final boolean DEFAULT_ECHO_HANDLING= true;
+	static final boolean DEFAULT_ECHO_HANDLING = true;
 	static final String DEFAULT_SERIAL_PORT = "COM1";
 
 	private final String serialPort;
 	private final int baudRateChangeDelay;
 	private final boolean echoHandling;
-	
+
 	public DmlsMeterDeviceConfig(String serialPort, int baudRateChangeDelay, boolean echoHandling) {
 		this.serialPort = serialPort;
 		this.baudRateChangeDelay = baudRateChangeDelay;
 		this.echoHandling = echoHandling;
 	}
-	
+
 	public String getSerialPort() {
 		return this.serialPort;
 	}
-	
+
 	public int getBaudRateChangeDelay() {
 		return this.baudRateChangeDelay;
 	}
-	
+
 	public boolean getEchoHandling() {
 		return this.echoHandling;
 	}
 
-
 	@Override
 	public String toString() {
-		return "DmlsMeterDeviceConfig [serialPort=" + serialPort
-				+ ", baudRateChangeDelay=" + baudRateChangeDelay
-				+ ", echoHandling=" + echoHandling + "]";
+		return "DmlsMeterDeviceConfig [serialPort=" + serialPort + ", baudRateChangeDelay=" + baudRateChangeDelay + ", echoHandling=" + echoHandling + "]";
 	}
-
-
 
 }
