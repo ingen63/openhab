@@ -15,8 +15,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author Günter Speckhofer
+ * Implementation for the DMLSMetr Reader. This impementation is reading from the serial interface and posting updates to the openHAB bus.
  * 
+ * @author Peter Kreutzer
+ * @author Günter Speckhofer
+ * @since 1.4.0
  */
 public class DmlsMeterReaderImpl implements DmlsMeterReader {
 
