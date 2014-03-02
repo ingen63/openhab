@@ -38,6 +38,7 @@ import org.slf4j.LoggerFactory;
  * Implement this class if you are going create an actively polling service like querying a Website/Device.
  * 
  * @author Peter Kreutzer
+ * @author Günter Speckhofer
  * @since 1.4.0
  */
 public class DmlsMeterBinding extends AbstractActiveBinding<DmlsMeterBindingProvider> implements ManagedService {
@@ -48,9 +49,7 @@ public class DmlsMeterBinding extends AbstractActiveBinding<DmlsMeterBindingProv
 	// <code>'^(.*?)\\.(serialPort|baudRateChangeDelay|echoHandling)$'</code>
 	private final Pattern METER_CONFIG_PATTERN = Pattern.compile("^(.*?)\\.(serialPort|baudRateChangeDelay|echoHandling)$");
 
-	private static final long DEFAULT_REFRESH_INTERVAL = 60 * 10; // 10 minutes
-	                                                              // in
-	                                                              // secconds
+	private static final long DEFAULT_REFRESH_INTERVAL = 60 * 10; // 10 minutes in seconds
 
 	/**
 	 * the refresh interval which is used to poll values from the dmlsMeter server (optional, defaults to 10 minutes)

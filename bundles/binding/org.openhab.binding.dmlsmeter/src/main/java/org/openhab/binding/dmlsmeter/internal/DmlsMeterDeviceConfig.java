@@ -13,6 +13,7 @@ package org.openhab.binding.dmlsmeter.internal;
  * Class defining the config parameter for dmls metering device
  * 
  * @author Peter Kreutzer
+ * @author Günter Speckhofer
  * @since 1.4.0
  */
 public class DmlsMeterDeviceConfig {
